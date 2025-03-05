@@ -45,3 +45,18 @@ sqlmap -r /tmp/kakukk/req7 --batch --tamper between --hostname --current-user --
 sqlmap -r /tmp/kakukk/req8 --batch --tamper between --hostname --current-user --dbms=mysql --level5 --risk3 | tee sqlmap_result_req8.txt
 sqlmap -r /tmp/kakukk/req9 --batch --tamper between --hostname --current-user --dbms=mysql --level5 --risk3 | tee sqlmap_result_req9.txt
 ```
+
+**Set the output directory**
+
+```
+└─$ python3 sqlmapper.py --requests /tmp/kakukk --result-out "/tmp/almafa"                  
+sqlmap -r /tmp/kakukk/req1 --batch --tamper between --hostname --current-user  | tee /tmp/almafa/sqlmap_result_req1.txt
+sqlmap -r /tmp/kakukk/req2 --batch --tamper between --hostname --current-user  | tee /tmp/almafa/sqlmap_result_req2.txt
+sqlmap -r /tmp/kakukk/req3 --batch --tamper between --hostname --current-user  | tee /tmp/almafa/sqlmap_result_req3.txt
+sqlmap -r /tmp/kakukk/req4 --batch --tamper between --hostname --current-user  | tee /tmp/almafa/sqlmap_result_req4.txt
+sqlmap -r /tmp/kakukk/req5 --batch --tamper between --hostname --current-user  | tee /tmp/almafa/sqlmap_result_req5.txt
+sqlmap -r /tmp/kakukk/req6 --batch --tamper between --hostname --current-user  | tee /tmp/almafa/sqlmap_result_req6.txt
+sqlmap -r /tmp/kakukk/req7 --batch --tamper between --hostname --current-user  | tee /tmp/almafa/sqlmap_result_req7.txt
+sqlmap -r /tmp/kakukk/req8 --batch --tamper between --hostname --current-user  | tee /tmp/almafa/sqlmap_result_req8.txt
+sqlmap -r /tmp/kakukk/req9 --batch --tamper between --hostname --current-user  | tee /tmp/almafa/sqlmap_result_req9.txt
+```
