@@ -5,11 +5,15 @@ from burp_reader import BurpRequests
 
 def parse_arguments():
     parser = ArgumentParser()
-    parser.add_argument("--requests", dest="requests", metavar="", help="Set the requests path")
-    parser.add_argument("--export-requests", dest="export_requests", metavar="", help="Exporting requests from a burp file")
-    parser.add_argument("--export-out", dest="export_out", metavar = "", help="Exported content output folder")
-    parser.add_argument("--extra-args", dest="extra_args", metavar="", help="Append extra arguments to the final command")
+    command_parser = parser.add_argument_group("Command Creation")
+    command_parser.add_argument("--requests", dest="requests", metavar="", help="Set the requests path")
+    command_parser.add_argument("--extra-args", dest="extra_args", metavar="", help="Append extra arguments to the final command")
+    command_parser.add_argument("--result-out", dest="result_out", metavar="", help="Result files output path")
 
+    exp_parser = parser.add_argument_group("Request Exporting")
+    exp_parser.add_argument("--export-requests", dest="export_requests", metavar="", help="Exporting requests from a burp file")
+    exp_parser.add_argument("--export-out", dest="export_out", metavar = "", help="Exported content output folder")
+    
     return parser.parse_args()
 
 
@@ -24,13 +28,15 @@ def main():
 
     if args.requests:
         extra_args = args.extra_args if args.extra_args else ""
+        result_out_path = args.result_out if args.result_out else ""
 
         requests = os.listdir(args.requests)
         commands = []
         template = f"sqlmap -r PATH"
         for req in requests:
             rqpath = os.path.join(args.requests,req)
-            print(f"sqlmap -r {rqpath} --batch --tamper between --hostname --current-user {extra_args} | tee sqlmap_result_{req}.txt")
+            final_file_name = f"sqlmap_result_{req}.txt"
+            print(f"sqlmap -r {rqpath} --batch --tamper between --hostname --current-user {extra_args} | tee {os.path.join(result_out_path, final_file_name)}")
 
     if args.export_requests:
         export_out = args.export_out if args.export_out else ""
